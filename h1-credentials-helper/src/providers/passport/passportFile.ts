@@ -24,7 +24,7 @@ export const loadPassportFile = (location?: string): PassportFile => {
 };
 
 export const validatePassportFile = (file: PassportFile) => {
-  if (!file.subject_id) {
+  if (!file.issuer) {
     throw new Error("Issuer is empty");
   }
   if (!file.certificate_id) {
@@ -33,7 +33,7 @@ export const validatePassportFile = (file: PassportFile) => {
   if (!file.private_key) {
     throw new Error("Private key is missing");
   }
-  if (!file.public_key) {
+  if (!file.subject_id) {
     throw new Error("Subject is missing");
   }
 };

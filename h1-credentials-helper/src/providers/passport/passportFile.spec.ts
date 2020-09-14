@@ -1,6 +1,25 @@
-import { PassportFile, validatePassportFile } from "./passportFile";
+import { join } from "path";
+import {
+  loadPassportFile,
+  PassportFile,
+  validatePassportFile,
+} from "./passportFile";
 
-describe("passportFile loading", () => {});
+describe("passportFile loading", () => {
+  it("loads valid passport file correctly", () => {
+    const fixturePath = join(__dirname, "fixtures", "validPassport.json");
+    const passport = loadPassportFile(fixturePath);
+
+    expect(passport).toMatchSnapshot();
+  });
+
+  it("throws an error when passport file is invalid", () => {
+    const fixturePath = join(__dirname, "fixtures", "invalidPassport.json");
+    const expectedError = "Private key is missing";
+
+    expect(() => loadPassportFile(fixturePath)).toThrow(expectedError);
+  });
+});
 
 describe("passportFile validation", () => {
   it("throws an error when required property is missing", () => {

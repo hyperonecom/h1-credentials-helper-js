@@ -1,1 +1,1 @@
-openapi-generator generate -i .\\openapi.json -c typescript-axios.yaml -g typescript-axios
+openapi-generator generate -i .\\openapi.json -c config.yaml -g javascript

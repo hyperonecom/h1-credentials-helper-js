@@ -1,0 +1,4 @@
+outputDir: ./src
+additionalProperties:
+  enumPropertyNaming: UPPERCASE
+  npmName: typescript

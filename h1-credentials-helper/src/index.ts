@@ -1,1 +1,1 @@
-export { getCredentialsHelper as getPassportCredentialsHelper } from "./providers/passport/index";
+export { getCredentialsHelper as getPassportCredentialsHelper } from "./providers/passport";

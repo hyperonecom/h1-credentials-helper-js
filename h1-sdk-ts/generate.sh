@@ -1,0 +1,1 @@
+openapi-generator generate -i .\\openapi.json -c typescript-axios.yaml -g typescript-axios

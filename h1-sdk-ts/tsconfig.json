@@ -5,7 +5,7 @@
     "declaration": true,
     "noEmit": false,
     "emitDeclarationOnly": true,
-    "outFile": "dist/types.d.ts",
+    "outDir": "dist/",
     "removeComments": true
   }
 }

@@ -1,4 +1,3 @@
 outputDir: .
 additionalProperties:
-  enumPropertyNaming: UPPERCASE
   npmName: hyperone

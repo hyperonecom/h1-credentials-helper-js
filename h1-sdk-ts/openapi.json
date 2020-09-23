@@ -3642,7 +3642,7 @@
         "description": "Delete agent",
         "tags": ["provider_project_agent"],
         "x-permissions": ["provider/agent/delete"],
-        "x-state": ["Online", "Suspended"],
+        "x-state": ["Unknown"],
         "responses": {
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -4483,7 +4483,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/enabledService"
+                  "$ref": "#/components/schemas/agent"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "operation queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/agent"
                 }
               }
             }
@@ -17728,6 +17738,12 @@
               }
             },
             "links": {
+              "ip": {
+                "operationId": "networking_project_ip_list",
+                "parameters": {
+                  "network": "$request.path.networkId"
+                }
+              },
               "netadp": {
                 "operationId": "networking_project_netadp_list",
                 "parameters": {
@@ -17816,186 +17832,6 @@
             "$ref": "#/components/responses/UnauthorizedError"
           }
         }
-      }
-    },
-    "/networking/{locationId}/project/{projectId}/network/{networkId}/ip": {
-      "get": {
-        "summary": "List networking/network.ip",
-        "description": "List networking/network.ip",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/projectId"
-          },
-          {
-            "$ref": "#/components/parameters/locationId"
-          },
-          {
-            "$ref": "#/components/parameters/networkId"
-          }
-        ],
-        "operationId": "networking_project_network_ip_list",
-        "tags": ["networking_project_network"],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "title": "Ip collection",
-                  "items": {
-                    "$ref": "#/components/schemas/ip"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          }
-        },
-        "x-permissions": ["networking/network.ip/list"]
-      },
-      "post": {
-        "summary": "Create networking/network.ip",
-        "description": "Create networking/network.ip",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/projectId"
-          },
-          {
-            "$ref": "#/components/parameters/locationId"
-          },
-          {
-            "$ref": "#/components/parameters/networkId"
-          }
-        ],
-        "operationId": "networking_project_network_ip_create",
-        "tags": ["networking_project_network"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/networking_project_network_ip_create"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ip"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          }
-        },
-        "x-permissions": ["networking/network.ip/create"]
-      }
-    },
-    "/networking/{locationId}/project/{projectId}/network/{networkId}/ip/{ipId}": {
-      "get": {
-        "summary": "Get networking/network.ip",
-        "description": "Get networking/network.ip",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/projectId"
-          },
-          {
-            "$ref": "#/components/parameters/locationId"
-          },
-          {
-            "$ref": "#/components/parameters/networkId"
-          },
-          {
-            "name": "ipId",
-            "in": "path",
-            "description": "ipId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "operationId": "networking_project_network_ip_get",
-        "tags": ["networking_project_network"],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ip"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          }
-        },
-        "x-permissions": ["networking/network.ip/get"]
-      },
-      "delete": {
-        "summary": "Delete networking/network.ip",
-        "description": "Delete networking/network.ip",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/projectId"
-          },
-          {
-            "$ref": "#/components/parameters/locationId"
-          },
-          {
-            "$ref": "#/components/parameters/networkId"
-          },
-          {
-            "name": "ipId",
-            "in": "path",
-            "description": "ipId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "operationId": "networking_project_network_ip_delete",
-        "tags": ["networking_project_network"],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ip"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          }
-        },
-        "x-permissions": ["networking/network.ip/delete"]
       }
     },
     "/networking/{locationId}/project/{projectId}/network/{networkId}/service": {
@@ -23431,68 +23267,6 @@
         }
       }
     },
-    "/storage/{locationId}/project/{projectId}/vault/{vaultId}/actions/snapshot": {
-      "post": {
-        "summary": "Snapshot storage/vault",
-        "description": "action snapshot",
-        "operationId": "storage_project_vault_snapshot",
-        "tags": ["storage_project_vault"],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/projectId"
-          },
-          {
-            "$ref": "#/components/parameters/locationId"
-          },
-          {
-            "$ref": "#/components/parameters/vaultId"
-          },
-          {
-            "$ref": "#/components/parameters/x-idempotency-key"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/vault"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "operation queued",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/vault"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          }
-        },
-        "x-permissions": ["storage/vault/snapshot"],
-        "x-state": ["Online", "Off"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/storage_project_vault_snapshot"
-              }
-            }
-          },
-          "required": true
-        }
-      }
-    },
     "/storage/{locationId}/project/{projectId}/vault/{vaultId}/snapshot": {
       "get": {
         "summary": "List storage/vault.snapshot",
@@ -27690,6 +27464,55 @@
           }
         }
       },
+      "project.billing": {
+        "type": "object",
+        "properties": {
+          "credits": {
+            "type": "number"
+          },
+          "creditsBonus": {
+            "type": "number"
+          },
+          "creditLimit": {
+            "type": "number"
+          }
+        }
+      },
+      "organisation.billing": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            },
+            "required": ["street", "zipcode", "city", "country"]
+          },
+          "nip": {
+            "type": "string"
+          }
+        }
+      },
       "agentResource": {
         "type": "object",
         "properties": {
@@ -27917,6 +27740,16 @@
               "$ref": "#/components/schemas/tag"
             },
             "x-permissions": ["iam/user.tag/list"]
+          }
+        }
+      },
+      "project.feature": {
+        "type": "object",
+        "properties": {
+          "earlyAdopter": {
+            "title": "Feature earlyAdopter",
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -28761,7 +28594,7 @@
           "type": {
             "title": "Credential type",
             "type": "string",
-            "enum": []
+            "enum": ["ssh"]
           },
           "value": {
             "title": "Credential value",
@@ -30606,7 +30439,8 @@
           },
           "address": {
             "title": "Ip address",
-            "type": "string"
+            "type": "string",
+            "pattern": "/^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$/"
           },
           "tag": {
             "$ref": "#/components/schemas/tag_array"
@@ -31055,11 +30889,7 @@
             }
           },
           "uri": {
-            "type": "string",
-            "format": "uri",
-            "x-resource": {
-              "kind": "networking/netadp"
-            }
+            "type": "string"
           },
           "macaddress": {
             "type": "string"
@@ -31288,19 +31118,6 @@
           }
         },
         "format": "patch network"
-      },
-      "networking_project_network_ip_create": {
-        "type": "object",
-        "properties": {
-          "address": {
-            "title": "Ip address",
-            "type": "string",
-            "pattern": "/^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$/"
-          },
-          "tag": {
-            "$ref": "#/components/schemas/tag_array"
-          }
-        }
       },
       "network": {
         "type": "object",
@@ -32016,11 +31833,7 @@
           },
           "uri": {
             "title": "Snapshot uri",
-            "type": "string",
-            "format": "uri",
-            "x-resource": {
-              "kind": "storage/snapshot"
-            }
+            "type": "string"
           },
           "sizeUsed": {
             "title": "Snapshot sizeUsed",
@@ -32101,30 +31914,6 @@
           }
         },
         "format": "Action resize"
-      },
-      "storage_project_vault_snapshot": {
-        "type": "object",
-        "required": ["name"],
-        "properties": {
-          "name": {
-            "title": "Vault name",
-            "type": "string"
-          },
-          "service": {
-            "title": "Vault service",
-            "type": "string",
-            "default": "5badbeb585f66b3d085727eb",
-            "format": "uri",
-            "x-resource": {
-              "kind": "billing/service",
-              "filter": {
-                "kind": "storage/snapshot",
-                "type": "flavour"
-              }
-            }
-          }
-        },
-        "format": "Action snapshot"
       },
       "storage_project_vault_snapshot_create": {
         "type": "object",
@@ -32442,7 +32231,8 @@
             "type": "string",
             "format": "uri",
             "x-resource": {
-              "kind": "storage/disk"
+              "kind": "storage/disk",
+              "state": ["Detached"]
             },
             "x-permissions": ["storage/disk/attach"]
           }
@@ -33554,10 +33344,6 @@
               "networking/network.gateway/update": "",
               "networking/network.firewall/update": "",
               "networking/network/delete": "",
-              "networking/network.ip/list": "",
-              "networking/network.ip/create": "",
-              "networking/network.ip/get": "",
-              "networking/network.ip/delete": "",
               "networking/network.service/list": "",
               "networking/network.service/get": "",
               "networking/network.tag/list": "",
@@ -33642,7 +33428,6 @@
               "storage/vault/start": "",
               "storage/vault/stop": "",
               "storage/vault/resize": "",
-              "storage/vault/snapshot": "",
               "storage/vault.snapshot/list": "",
               "storage/vault.snapshot/create": "",
               "storage/vault.snapshot/get": "",

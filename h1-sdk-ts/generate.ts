@@ -13,13 +13,13 @@ const findFiles = async (extension: string): Promise<string[]> => {
 
 const replaceInManyFiles = async (
   files: string[],
-  regex: string,
+  textToReplace: string,
   replacementText: string
 ): Promise<void[]> => {
   return Promise.all(
     files.map(async (file: string) => {
       const content = readFileSync(file, "utf8");
-      const replacedText = content.replace(regex, replacementText);
+      const replacedText = content.split(textToReplace).join(replacementText);
       return writeFileSync(file, replacedText, { encoding: "utf-8" });
     })
   );
@@ -51,9 +51,8 @@ const main = async () => {
   await execute("yarn add -D typedoc@0.19.2 typedoc-plugin-markdown@3.0.3");
 
   const typescriptFiles = await findFiles("ts");
-  const replacedText = "any";
 
-  await replaceInManyFiles(typescriptFiles, replacedText, "any");
+  await replaceInManyFiles(typescriptFiles, "any", "any");
 
   await execute("yarn typedoc --plugin typedoc-plugin-markdown");
   await execute("yarn build");

@@ -52,7 +52,7 @@ const main = async () => {
 
   const typescriptFiles = await findFiles("ts");
 
-  await replaceInManyFiles(typescriptFiles, "any", "any");
+  await replaceInManyFiles(typescriptFiles, "AnyType", "any");
 
   await execute("yarn typedoc --plugin typedoc-plugin-markdown");
   await execute("yarn build");

@@ -1,5 +1,5 @@
 {
-  "name": "h1-credentials-helper",
+  "name": "@hyperone/credentials",
   "version": "1.0.0",
   "main": "dist/index.js",
   "repository": "https://github.com/kuskoman/h1-client-ts",

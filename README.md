@@ -9,13 +9,13 @@ or compiled (transpiled) from sources.
 ### npm
 
 ```shell
-npm i <package name>
+npm i @hyperone/credentials
 ```
 
 ### yarn
 
 ```shell
-yarn add <package name>
+yarn add @hyperone/credentials
 ```
 
 ### compiling from sources
@@ -29,7 +29,7 @@ yarn add <package name>
 2. Continue to directory
 
    ```shell
-   cd <repository name>/h1-credentials-helper
+   cd <repository name>/h1-credentials-helper-ts
    ```
 
 3. Install dependencies
@@ -57,7 +57,7 @@ Passport provider is based on passport file which can be generated using [h1-cli
 #### Usage
 
 ```typescript
-import { getPassportCredentialsHelper } from "this package is not on npm yet, so i cant provide name";
+import { getPassportCredentialsHelper } from "@hyperone/credentials";
 
 const authProvider = getPassportCredentialsHelper();
 const jwt = authProvider.getToken();

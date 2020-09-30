@@ -1,9 +1,9 @@
-name: JavaScript files
+name: Publish library to npm
 
 on: [push]
 
 jobs:
-  generate:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

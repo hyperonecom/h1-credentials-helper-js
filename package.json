@@ -2,7 +2,8 @@
   "name": "@hyperone/credentials",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "repository": "https://github.com/kuskoman/h1-client-ts",
+  "repository": "https://github.com/hyperone/h1-credentials-helper-ts",
+  "license": "MIT",
   "scripts": {
     "test": "jest",
     "build": "tsc"

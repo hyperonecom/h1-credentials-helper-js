@@ -60,5 +60,5 @@ Passport provider is based on passport file which can be generated using [h1-cli
 import { getPassportCredentialsHelper } from "@hyperone/credentials";
 
 const authProvider = getPassportCredentialsHelper();
-const jwt = authProvider.getToken();
+const jwt = authProvider.getToken("https://api.hyperone.com/v2");
 ```

@@ -18,7 +18,7 @@ npm i @hyperone/credentials
 yarn add @hyperone/credentials
 ```
 
-### compiling from sources
+### Compiling from sources
 
 1. Clone repository:
 

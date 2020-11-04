@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "prepack": "yarn build"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.0",

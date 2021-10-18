@@ -3,6 +3,7 @@ import { join } from "path";
 import { readFileSync } from "fs";
 
 export const loadPassportFile = (location?: string): PassportFile => {
+  location = process.env.HYPERONE_PASSPORT_FILE || location;
   location ??= getDefaultPassportLocation();
 
   let passportFile: string;

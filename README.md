@@ -62,3 +62,7 @@ import { getPassportCredentialsHelper } from "@hyperone/credentials";
 const authProvider = getPassportCredentialsHelper();
 const jwt = authProvider.getToken("https://api.hyperone.com/v2");
 ```
+
+## Environment Variables
+
+- ```HYPERONE_PASSPORT_FILE``` set passport file location

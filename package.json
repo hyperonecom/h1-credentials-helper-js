@@ -9,6 +9,9 @@
     "build": "tsc",
     "prepack": "yarn build"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "devDependencies": {
     "@types/jest": "^28.1.2",
     "@types/jsonwebtoken": "^8.5.8",

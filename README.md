@@ -1,4 +1,4 @@
-# H1-credentials-helper-ts
+# H1-credentials-helper-js
 
 ## Installation
 
@@ -23,13 +23,13 @@ yarn add @hyperone/credentials
 1. Clone repository:
 
    ```shell
-   git clone https://github.com/hyperonecom/h1-credentials-helper-ts
+   git clone https://github.com/hyperonecom/h1-credentials-helper-js
    ```
 
 2. Continue to directory
 
    ```shell
-   cd h1-credentials-helper-ts
+   cd h1-credentials-helper-js
    ```
 
 3. Install dependencies
